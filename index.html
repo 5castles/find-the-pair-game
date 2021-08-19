@@ -10,7 +10,6 @@
 <body>
   <header>
     <h1>Find-the-pair</h1>
-    <audio controls class="background-music" src="./audio/backgroundmusic/bensoundmouse.mp3"></audio>
   </header>
 
   <section class="game">
@@ -21,22 +20,22 @@
     </article>
 
     <article class="game-board no-show">
-      <img src="./images/default.png" class="one" data-index="0"></img>
-      <img src="./images/default.png" data-index="1"></img>
-      <img src="./images/default.png" data-index="2"></img>
-      <img src="./images/default.png" data-index="3"></img>
-      <img src="./images/default.png" data-index="4"></img>
-      <img src="./images/default.png" data-index="5"></img>
-      <img src="./images/default.png" data-index="6"></img>
-      <img src="./images/default.png" data-index="7"></img>
-      <img src="./images/default.png" data-index="8"></img>
-      <img src="./images/default.png" data-index="9"></img>
-      <img src="./images/default.png" data-index="10"></img>
-      <img src="./images/default.png" data-index="11"></img>
-      <img src="./images/default.png" data-index="12"></img>
-      <img src="./images/default.png" data-index="13"></img>
-      <img src="./images/default.png" data-index="14"></img>
-      <img src="./images/default.png" data-index="15"></img>
+      <img data-index="0"></img>
+      <img data-index="1"></img>
+      <img data-index="2"></img>
+      <img data-index="3"></img>
+      <img data-index="4"></img>
+      <img data-index="5"></img>
+      <img data-index="6"></img>
+      <img data-index="7"></img>
+      <img data-index="8"></img>
+      <img data-index="9"></img>
+      <img data-index="10"></img>
+      <img data-index="11"></img>
+      <img data-index="12"></img>
+      <img data-index="13"></img>
+      <img data-index="14"></img>
+      <img data-index="15"></img>
     </article>
 
     <article class="status-bar no-show">
@@ -49,10 +48,16 @@
     </article>
 
     <article class="result no-show">
-      <button>다시하기</button>
+      <button class="result__restart">다시하기</button>
       <img class="result__img" src="./images/success.png"/>
     </article>
   </section>
+
+  <audio hidden class="audio-pick" src="./audio/sound/pick.mp3"></audio>
+  <audio hidden class="audio-correct" src="./audio/sound/correctanswer.wav"></audio>
+  <audio hidden class="audio-game-fail" src="./audio/sound/gamefail.mp3"></audio>
+  <audio hidden class="audio-game-success" src="./audio/sound/gamesuccess.mp3"></audio>
+  <audio hidden class="audio-background-music" controls src="./audio/backgroundmusic/bensoundmoose.mp3"></audio>
 
   <script src="index.js/index.js"></script>
 </body>
