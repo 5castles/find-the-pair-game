@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find-the-pair</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <header>
+    <h1>Find-the-pair</h1>
+    <audio controls class="background-music" src="./audio/backgroundmusic/bensoundmouse.mp3"></audio>
+  </header>
+
+  <section class="game">
+    <article class="game-start">
+      <button class="game-start__button">
+        게임시작
+      </button>
+    </article>
+
+    <article class="game-board no-show">
+      <img src="./images/default.png" class="one" data-index="0"></img>
+      <img src="./images/default.png" data-index="1"></img>
+      <img src="./images/default.png" data-index="2"></img>
+      <img src="./images/default.png" data-index="3"></img>
+      <img src="./images/default.png" data-index="4"></img>
+      <img src="./images/default.png" data-index="5"></img>
+      <img src="./images/default.png" data-index="6"></img>
+      <img src="./images/default.png" data-index="7"></img>
+      <img src="./images/default.png" data-index="8"></img>
+      <img src="./images/default.png" data-index="9"></img>
+      <img src="./images/default.png" data-index="10"></img>
+      <img src="./images/default.png" data-index="11"></img>
+      <img src="./images/default.png" data-index="12"></img>
+      <img src="./images/default.png" data-index="13"></img>
+      <img src="./images/default.png" data-index="14"></img>
+      <img src="./images/default.png" data-index="15"></img>
+    </article>
+
+    <article class="status-bar no-show">
+      <div>
+        <span class="status-bar__timer">남은 시간 : 40</span>
+      </div>
+      <div>
+        <span class="status-bar__rest-answer-count">남은 뚱이 : 8</span>
+      </div>
+    </article>
+
+    <article class="result no-show">
+      <button>다시하기</button>
+      <img class="result__img" src="./images/success.png"/>
+    </article>
+  </section>
+
+  <script src="index.js/index.js"></script>
+</body>
+</html>
