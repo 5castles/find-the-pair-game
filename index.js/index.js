@@ -30,6 +30,7 @@ const TIME_LIMIT_SECONDS = 5;
 let timeLimit = null;
 let timerId = null;
 
+const imageNamePool = [ 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8 ];
 let indexPool = {
   0: 0,
   1: 1,
@@ -49,9 +50,11 @@ let indexPool = {
   15: 15,
 };
 
-const imagePool = [ 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8 ];
 const shuffledImageIndexList = [];
 const shuffledSourceList = [];
+
+const pickedImgElementsList = [];
+let clickCount = 0;
 
 const MASTER_VOLUME = 0.2;
 
@@ -60,6 +63,20 @@ $pickSound.volume = MASTER_VOLUME;
 $correctSound.volume = MASTER_VOLUME;
 $gameFailSound.volume = MASTER_VOLUME;
 $gameSuccessSound.volume = MASTER_VOLUME;
+
+$gameStartButton.addEventListener('click', handleGameStartButtonClick);
+
+function handleGameStartButtonClick(event) {
+  resetForStart();
+  shuffleImagesOrder();
+
+  startTimer();
+  $backgroundMusic.play();
+
+  $gameStartContainer.classList.add(CLASSNAME_DISPLAY_NONE);
+  $gameBoard.classList.remove(CLASSNAME_DISPLAY_NONE);
+  $statusContainer.classList.remove(CLASSNAME_DISPLAY_NONE);
+}
 
 function resetForStart() {
   restAnswerCount = TOTAL_GOAL_POINT;
@@ -92,7 +109,6 @@ function resetForStart() {
   shuffledImageIndexList.length = 0;
   shuffledSourceList.length = 0;
 
-
   $gameBoard.childNodes.forEach((element) => {
     element.src = DEFAULT_IMG_SOURCE;
     element.draggable = false;
@@ -104,19 +120,6 @@ function resetForStart() {
 
     element.classList.remove(CLASSNAME_NO_POINTER_EVENT);
   });
-}
-
-function startTimer() {
-  timeLimit = TIME_LIMIT_SECONDS;
-
-  timerId = setInterval(() => {
-    $gameTimer.textContent = `남은 시간 : ${--timeLimit}`;
-
-    if (timeLimit === 0) {
-      clearInterval(timerId);
-      showEnding(false);
-    }
-  }, 1000);
 }
 
 function shuffleImagesOrder() {
@@ -133,27 +136,23 @@ function shuffleImagesOrder() {
   }
 
   shuffledImageIndexList.forEach((number) => {
-    const src = `./images/${imagePool[number]}.png`;
+    const src = `./images/${imageNamePool[number]}.png`;
     shuffledSourceList.push(src);
   });
 }
 
-function handleGameStartButtonClick(event) {
-  resetForStart();
-  shuffleImagesOrder();
+function startTimer() {
+  timeLimit = TIME_LIMIT_SECONDS;
 
-  startTimer();
-  $backgroundMusic.play();
+  timerId = setInterval(() => {
+    $gameTimer.textContent = `남은 시간 : ${--timeLimit}`;
 
-  event.currentTarget.classList.add(CLASSNAME_DISPLAY_NONE);
-  $gameBoard.classList.remove(CLASSNAME_DISPLAY_NONE);
-  $statusContainer.classList.remove(CLASSNAME_DISPLAY_NONE);
+    if (timeLimit === 0) {
+      clearInterval(timerId);
+      showEnding(false);
+    }
+  }, 1000);
 }
-
-$gameStartContainer.addEventListener('click', handleGameStartButtonClick);
-
-let clickCount = 0;
-const pickedImgElementsList = [];
 
 $gameBoard.addEventListener('click', handleCellClick);
 
@@ -237,14 +236,16 @@ function showEnding(isSuccess) {
   $resultContainer.classList.remove(CLASSNAME_DISPLAY_NONE);
 }
 
-$resultContainer.addEventListener('click', (event) => {
+$restartButton.addEventListener('click', handleRestartButtonClick);
+
+function handleRestartButtonClick() {
   resetForStart();
   shuffleImagesOrder();
 
   startTimer();
   $backgroundMusic.play();
 
-  event.currentTarget.classList.add(CLASSNAME_DISPLAY_NONE);
+  $resultContainer.classList.add(CLASSNAME_DISPLAY_NONE);
   $gameBoard.classList.remove(CLASSNAME_DISPLAY_NONE);
   $statusContainer.classList.remove(CLASSNAME_DISPLAY_NONE);
-});
+}
