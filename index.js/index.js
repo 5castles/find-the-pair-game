@@ -248,8 +248,3 @@ $resultContainer.addEventListener('click', (event) => {
   $gameBoard.classList.remove(CLASSNAME_DISPLAY_NONE);
   $statusContainer.classList.remove(CLASSNAME_DISPLAY_NONE);
 });
-
-//DOM 요소로 안잡혀서 classList undefind 라고 계속 나오는건가?  DOM 요소가 아닌 노드리스트를 반환하는데 DOM 과 Node 차이 공부필요하다.
-// ! 연산자 와 in 연산자 우선순위!
-//Q. 분리하면 setTimeout콜백함수 실행전에 되버림..
-//비동기  await  async  promise?
