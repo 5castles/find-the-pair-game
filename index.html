@@ -1,64 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Find-the-pair</title>
-  <link rel="stylesheet" href="styles/style.css">
-</head>
-<body>
-  <header>
-    <h1>Find-the-pair</h1>
-  </header>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>같은 뚱이 찾기</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <h1>같은 뚱이 찾기</h1>
+    </header>
 
-  <section class="game">
-    <article class="game-start">
-      <button class="game-start__button">
-        게임시작
-      </button>
-    </article>
+    <section class="game">
+      <article class="game-start">
+        <img class="game-start__img" src="./images/main.png" >
+        <button class="game-start__button">
+          게임시작
+        </button>
+      </article>
 
-    <article class="game-board no-show">
-      <img data-index="0"></img>
-      <img data-index="1"></img>
-      <img data-index="2"></img>
-      <img data-index="3"></img>
-      <img data-index="4"></img>
-      <img data-index="5"></img>
-      <img data-index="6"></img>
-      <img data-index="7"></img>
-      <img data-index="8"></img>
-      <img data-index="9"></img>
-      <img data-index="10"></img>
-      <img data-index="11"></img>
-      <img data-index="12"></img>
-      <img data-index="13"></img>
-      <img data-index="14"></img>
-      <img data-index="15"></img>
-    </article>
+      <article class="status-bar display-none">
+        <div>
+          <span class="status-bar__timer">남은 시간 : 40</span>
+        </div>
+        <div>
+          <span class="status-bar__rest-answer-count">남은 뚱이 : 8</span>
+        </div>
+      </article>
 
-    <article class="status-bar no-show">
-      <div>
-        <span class="status-bar__timer">남은 시간 : 40</span>
-      </div>
-      <div>
-        <span class="status-bar__rest-answer-count">남은 뚱이 : 8</span>
-      </div>
-    </article>
+      <article class="game-board display-none">
+        <img data-index="0"></img>
+        <img data-index="1"></img>
+        <img data-index="2"></img>
+        <img data-index="3"></img>
+        <img data-index="4"></img>
+        <img data-index="5"></img>
+        <img data-index="6"></img>
+        <img data-index="7"></img>
+        <img data-index="8"></img>
+        <img data-index="9"></img>
+        <img data-index="10"></img>
+        <img data-index="11"></img>
+        <img data-index="12"></img>
+        <img data-index="13"></img>
+        <img data-index="14"></img>
+        <img data-index="15"></img>
+      </article>
 
-    <article class="result no-show">
-      <button class="result__restart">다시하기</button>
-      <img class="result__img" src="./images/success.png"/>
-    </article>
-  </section>
+      <article class="result display-none">
+        <img class="result__img" src="./images/success.png"/>
+        <span class="result__text"></span>
+        <button class="result__restart-button">
+          다시하기
+        </button>
+      </article>
+    </section>
 
-  <audio hidden class="audio-pick" src="./audio/sound/pick.mp3"></audio>
-  <audio hidden class="audio-correct" src="./audio/sound/correctanswer.wav"></audio>
-  <audio hidden class="audio-game-fail" src="./audio/sound/gamefail.mp3"></audio>
-  <audio hidden class="audio-game-success" src="./audio/sound/gamesuccess.mp3"></audio>
-  <audio hidden class="audio-background-music" controls src="./audio/backgroundmusic/bensoundmoose.mp3"></audio>
+    <audio hidden class="audio-pick" src="./audio/sound/pick.mp3"></audio>
+    <audio hidden class="audio-correct" src="./audio/sound/correctanswer.wav"></audio>
+    <audio hidden class="audio-game-fail" src="./audio/sound/gamefail.mp3"></audio>
+    <audio hidden class="audio-game-success" src="./audio/sound/gamesuccess.mp3"></audio>
+    <audio hidden class="audio-background-music" controls src="./audio/backgroundmusic/bensoundmoose.mp3"></audio>
 
-  <script src="index.js/index.js"></script>
-</body>
+    <script src="index.js/index.js"></script>
+  </body>
 </html>
