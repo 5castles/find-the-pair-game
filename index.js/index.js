@@ -109,6 +109,12 @@ function resetForStart() {
   shuffledImageIndexList.length = 0;
   shuffledSourceList.length = 0;
 
+  for (let i = 0; i < 16; i++) {
+    $gameBoard.childNodes.forEach((element) => {
+      element.src = `./images/${imageNamePool[i]}.png`;
+    });
+  }
+
   $gameBoard.childNodes.forEach((element) => {
     element.src = DEFAULT_IMG_SOURCE;
     element.draggable = false;
