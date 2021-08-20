@@ -72,8 +72,17 @@ section {
 }
 
 .game-board img {
+  position: absolute;
   width: 130px;
   height: 130px;
+}
+
+.front-img {
+  z-index: 3;
+}
+
+.back-img {
+  z-index: 1;
 }
 
 .result {
@@ -91,4 +100,8 @@ section {
 
 .no-pointer-event {
   pointer-events: none;
+}
+
+.hidden {
+  visibility: hidden;
 }

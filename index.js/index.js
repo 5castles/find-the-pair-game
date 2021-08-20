@@ -1,9 +1,15 @@
 const $gameStartContainer = document.querySelector('.game-start');
 const $gameStartButton = document.querySelector('.game-start__button');
+
 const $gameBoard = document.querySelector('.game-board');
+const imgBoxElementList = document.querySelectorAll('.game-board__img-box');
+const frontImageElementList = document.querySelectorAll('.front-img');
+const backImageElementList = document.querySelectorAll('.back-img');
+
 const $statusContainer = document.querySelector('.status-bar');
 const $restAnswerCountText = document.querySelector('.status-bar__rest-answer-count');
 const $gameTimer = document.querySelector('.status-bar__timer');
+
 const $resultContainer = document.querySelector('.result');
 const $resultImage = document.querySelector('.result__img');
 const $resultText = document.querySelector('.result__text');
@@ -17,9 +23,10 @@ const $gameSuccessSound = document.querySelector('.audio-game-success');
 
 const CLASSNAME_DISPLAY_NONE = 'display-none';
 const CLASSNAME_NO_POINTER_EVENT = 'no-pointer-event';
+const CLASSNAME_HIDDEN = 'hidden';
 
 const DEFAULT_IMG_SOURCE = './images/default.png';
-const FAIL_IMG_SOURCE = './images/default.png'; //
+const FAIL_IMG_SOURCE = './images/default.png';
 const SUCCESS_IMG_SOURCE = './images/success.png';
 
 const TOTAL_GOAL_POINT = 8;
@@ -53,16 +60,18 @@ let indexPool = {
 const shuffledImageIndexList = [];
 const shuffledSourceList = [];
 
-const pickedImgElementsList = [];
+const clickedFrontList = [];
+const openedBackList = [];
 let clickCount = 0;
 
-const MASTER_VOLUME = 0.2;
+const VOLUME = 0.2;
 
-$backgroundMusic.volume = MASTER_VOLUME;
-$pickSound.volume = MASTER_VOLUME;
-$correctSound.volume = MASTER_VOLUME;
-$gameFailSound.volume = MASTER_VOLUME;
-$gameSuccessSound.volume = MASTER_VOLUME;
+$backgroundMusic.volume
+= $pickSound.volume
+= $correctSound.volume
+= $gameFailSound.volume
+= $gameSuccessSound.volume = VOLUME;
+
 
 $gameStartButton.addEventListener('click', handleGameStartButtonClick);
 
@@ -109,22 +118,15 @@ function resetForStart() {
   shuffledImageIndexList.length = 0;
   shuffledSourceList.length = 0;
 
-  for (let i = 0; i < 16; i++) {
-    $gameBoard.childNodes.forEach((element) => {
-      element.src = `./images/${imageNamePool[i]}.png`;
-    });
-  }
-
-  $gameBoard.childNodes.forEach((element) => {
+  frontImageElementList.forEach((element) => {
     element.src = DEFAULT_IMG_SOURCE;
+    element.classList.remove(CLASSNAME_HIDDEN);
     element.draggable = false;
   });
 
-  const cellList = Array.from($gameBoard.children);
-  cellList.forEach((element) => {
-    if (!element.classList) return;
-
+  imgBoxElementList.forEach((element) => {
     element.classList.remove(CLASSNAME_NO_POINTER_EVENT);
+    element.draggable = false;
   });
 }
 
@@ -143,8 +145,14 @@ function shuffleImagesOrder() {
 
   shuffledImageIndexList.forEach((number) => {
     const src = `./images/${imageNamePool[number]}.png`;
+
     shuffledSourceList.push(src);
   });
+
+  backImageElementList.forEach((element) => {
+    element.src = shuffledSourceList[element.dataset.index];
+    element.draggable = false;
+  })
 }
 
 function startTimer() {
@@ -170,34 +178,35 @@ function handleCellClick(event) {
 
   const $clicked = event.target;
 
-  $clicked.src = shuffledSourceList[$clicked.dataset.index];
-  $clicked.classList.add(CLASSNAME_NO_POINTER_EVENT);
+  $clicked.classList.add(CLASSNAME_HIDDEN);
+  $clicked.parentElement.classList.add(CLASSNAME_NO_POINTER_EVENT);
 
-  pickedImgElementsList.push($clicked)
+  clickedFrontList.push($clicked);
+  openedBackList.push($clicked.nextElementSibling);
   clickCount++;
 
   if (clickCount === 2) {
-    checkTheAnswer(pickedImgElementsList);
+    checkTheAnswer(openedBackList, clickedFrontList);
   }
 }
 
-function checkTheAnswer(elementList) {
-  if (!(elementList[0].src === elementList[1].src)) {
-    backToDefaultImagesAndResetTools();
-
-    elementList.forEach((element) => {
-      element.classList.remove(CLASSNAME_NO_POINTER_EVENT);
-    });
-  } else if (elementList[0].src === elementList[1].src) {
+function checkTheAnswer(openedImages, clickedFrontList) {
+  if (!(openedImages[0].src === openedImages[1].src)) {
+    respondToWrongAnswer(clickedFrontList);
+  } else if (openedImages[0].src === openedImages[1].src) {
     respondToAnswer();
     resetCheckingTools();
   }
 }
 
-function backToDefaultImagesAndResetTools() {
+function respondToWrongAnswer(clickedFrontList) {
   setTimeout(function() {
-    pickedImgElementsList.forEach((element) => {
-      element.src = DEFAULT_IMG_SOURCE;
+    clickedFrontList.forEach((element) => {
+      element.classList.remove(CLASSNAME_HIDDEN);
+    });
+
+    openedBackList.forEach((element) => {
+      element.parentElement.classList.remove(CLASSNAME_NO_POINTER_EVENT);
     });
 
     resetCheckingTools();
@@ -205,7 +214,8 @@ function backToDefaultImagesAndResetTools() {
 }
 
 function resetCheckingTools() {
-  pickedImgElementsList.length = 0;
+  openedBackList.length = 0;
+  clickedFrontList.length = 0;
   clickCount = 0;
 }
 
@@ -223,9 +233,9 @@ function respondToAnswer() {
   }
 }
 
-function showEnding(isSuccess) {
-  if (isSuccess) {
-    $resultText.textContent = '뚱이 : 사랑해요~🎶';
+function showEnding(boolean) {
+  if (boolean) {
+    $resultText.textContent = '뚱이 : "사랑해요~🎶"';
     $resultImage.src = SUCCESS_IMG_SOURCE;
     $gameSuccessSound.play();
   } else {
