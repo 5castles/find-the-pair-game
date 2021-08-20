@@ -46,6 +46,13 @@ section {
   border: 1px solid darkblue;
   background-color: skyblue;
   color: darkblue;
+  cursor: pointer;
+}
+
+.game-start__button:hover,
+.result__restart-button:hover {
+  transform:scale(1.2);
+  transition: .1s ease-in-out;
 }
 
 .status-bar {
