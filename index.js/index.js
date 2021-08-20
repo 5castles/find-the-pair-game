@@ -26,7 +26,7 @@ const TOTAL_GOAL_POINT = 8;
 let restAnswerCount = null;
 let correctPoint = null;
 
-const TIME_LIMIT_SECONDS = 5;
+const TIME_LIMIT_SECONDS = 30;
 let timeLimit = null;
 let timerId = null;
 
