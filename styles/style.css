@@ -3,6 +3,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
   font-family: 'Gamja Flower', cursive;
   font-size: 20px;
 }
@@ -23,6 +26,14 @@ section {
   align-items: center;
   width: 600px;
   height: 600px;
+}
+
+@media (max-width: 500px) {
+  section {
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .game-start {
@@ -61,6 +72,13 @@ section {
   width: 535px;
 }
 
+@media (max-width: 500px) {
+  .status-bar {
+    width: 90vw;
+    margin-top: 15px;
+  }
+}
+
 .game-board {
   display: grid;
   grid-template-columns: repeat(4, 130px);
@@ -71,10 +89,30 @@ section {
   margin-top: 25px;
 }
 
+@media (max-width: 500px) {
+  .game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 22vw);
+    grid-template-rows: repeat(4, 22vw);
+    column-gap: 5px;
+    row-gap: 5px;
+    width: max-content;
+    margin-top: 25px;
+  }
+}
+
 .game-board img {
   position: absolute;
   width: 130px;
   height: 130px;
+}
+
+@media (max-width: 500px) {
+  .game-board img {
+    position: absolute;
+    width: 22vw;
+    height: 22vw;
+  }
 }
 
 .front-img {
@@ -92,6 +130,12 @@ section {
   align-items: center;
   width: 100%;
   height: 80%;
+}
+
+@media (max-width:500px) {
+  .result__restart-button {
+    margin-top: 20px;
+  }
 }
 
 .display-none {
