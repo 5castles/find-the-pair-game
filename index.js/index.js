@@ -28,16 +28,21 @@ const CLASSNAME_HIDDEN = 'hidden';
 const DEFAULT_IMG_SOURCE = './images/default.png';
 const FAIL_IMG_SOURCE = './images/default.png';
 const SUCCESS_IMG_SOURCE = './images/success.png';
-
 const TOTAL_GOAL_POINT = 8;
-let restAnswerCount = null;
-let correctPoint = null;
-
 const TIME_LIMIT_SECONDS = 30;
-let timeLimit = null;
-let timerId = null;
+const VOLUME = 0.2;
 
 const imageNamePool = [ 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8 ];
+const shuffledImageIndexList = [];
+const shuffledSourceList = [];
+const clickedFrontList = [];
+const openedBackList = [];
+
+let restAnswerCount = null;
+let correctPoint = null;
+let timeLimit = null;
+let timerId = null;
+let clickCount = 0;
 let indexPool = {
   0: 0,
   1: 1,
@@ -56,15 +61,6 @@ let indexPool = {
   14: 14,
   15: 15,
 };
-
-const shuffledImageIndexList = [];
-const shuffledSourceList = [];
-
-const clickedFrontList = [];
-const openedBackList = [];
-let clickCount = 0;
-
-const VOLUME = 0.2;
 
 $backgroundMusic.volume
 = $pickSound.volume
